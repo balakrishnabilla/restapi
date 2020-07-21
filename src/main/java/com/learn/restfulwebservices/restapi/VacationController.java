@@ -1,8 +1,8 @@
 package com.learn.restfulwebservices.restapi;
 
-import com.learn.restfulwebservices.entity.VacationEntity;
-import com.learn.restfulwebservices.pojo.Vacation;
-import com.learn.restfulwebservices.repository.VacationRepository;
+import com.learn.restfulwebservices.restapi.entity.VacationEntity;
+import com.learn.restfulwebservices.restapi.pojo.Vacation;
+import com.learn.restfulwebservices.restapi.repository.VacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,23 +41,23 @@ public class VacationController {
     }
 
     private Vacation buildVactionPojo(VacationEntity save) {
-       return Vacation.builder()
-                .id(save.getId())
-                .name(save.getName())
-                .destination(save.getDestination())
-                .noOfDays(save.getNoOfDays())
-                .reviewList(save.getReviewList())
-                .build();
+        Vacation  vacation=new Vacation();
+        vacation.setId(save.getId());
+        vacation.setDestination(save.getDestination());
+        vacation.setName(save.getName());
+        vacation.setNoOfDays(save.getNoOfDays());
+       return vacation;
+
     }
 
     private VacationEntity getVacationEntity(@RequestBody Vacation vacation) {
-        return VacationEntity.builder()
-                .id(vacation.getId())
-                .name(vacation.getName())
-                .destination(vacation.getDestination())
-                .noOfDays(vacation.getNoOfDays())
-                .reviewList(vacation.getReviewList())
-                .build();
+        VacationEntity  vacationEntity=new VacationEntity();
+        vacationEntity.setId(vacation.getId());
+        vacationEntity.setDestination(vacation.getDestination());
+        vacationEntity.setName(vacation.getName());
+        vacationEntity.setNoOfDays(vacation.getNoOfDays());
+        return vacationEntity;
+
     }
 
 }

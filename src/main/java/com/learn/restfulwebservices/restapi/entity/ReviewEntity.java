@@ -1,7 +1,8 @@
-package com.learn.restfulwebservices.entity;
+package com.learn.restfulwebservices.restapi.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Builder
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "review")
