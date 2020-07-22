@@ -5,6 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
-public interface VacationRepository extends CrudRepository<VacationEntity, Long> {
-}
+public interface VacationRepository extends CrudRepository<VacationEntity, Long> {}

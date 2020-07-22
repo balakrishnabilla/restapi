@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class VacationRestApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(VacationRestApiApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(VacationRestApiApplication.class, args);
+    }
 }
