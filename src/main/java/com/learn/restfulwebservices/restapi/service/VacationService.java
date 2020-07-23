@@ -7,8 +7,6 @@ import com.learn.restfulwebservices.restapi.repository.VacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,8 @@ public class VacationService {
     @Autowired
     private VacationRepository vacationRepository;
 
-    public List<Vacation> retriveAllVacations() {
+    public List<Vacation> retrieveAllVacations() {
+
         List<Vacation> list = new ArrayList<>();
         vacationRepository
                 .findAll()
@@ -26,25 +25,26 @@ public class VacationService {
                         v -> {
                             list.add(buildVacationPojo(v));
                         });
+
+
         return list;
     }
 
-    public Vacation retriveVacation(@PathVariable("id") Long id) {
+    public Vacation retrieveVacation( Long id) {
         Optional<VacationEntity> vacationEntity = vacationRepository.findById(id);
         if (!vacationEntity.isPresent()) throw new VacationNotFoundException("id-" + id);
         return buildVacationPojo(vacationEntity.get());
     }
 
-    public Long createVacation(@RequestBody Vacation vacation) {
+    public Long createVacation( Vacation vacation) {
         return vacationRepository.save(getVacationEntity(vacation)).getId();
     }
 
-    public void deleteVacation(@PathVariable long id) {
+    public void deleteVacation( long id) {
         vacationRepository.deleteById(id);
     }
 
-    public ResponseEntity<Object> updateVacation(
-            @RequestBody Vacation vacation, @PathVariable long id) {
+    public ResponseEntity<Object> updateVacation(Vacation vacation, long id) {
 
         Optional<VacationEntity> vacationEntityOptional = vacationRepository.findById(id);
         if (!vacationEntityOptional.isPresent()) return ResponseEntity.notFound().build();
@@ -63,7 +63,7 @@ public class VacationService {
         return vacation;
     }
 
-    private VacationEntity getVacationEntity(@RequestBody Vacation vacation) {
+    private VacationEntity getVacationEntity(Vacation vacation) {
         VacationEntity vacationEntity = new VacationEntity();
         vacationEntity.setId(vacation.getId());
         vacationEntity.setDestination(vacation.getDestination());

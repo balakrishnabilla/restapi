@@ -17,17 +17,17 @@ public class VacationResource {
 
     @GetMapping(path = "/")
     public String vacations() {
-        return "Welcome to ACME VacationEntity portal";
+        return "Welcome to ACME VacationResource portal";
     }
 
     @GetMapping("/vacations")
-    public List<Vacation> retriveAllVacations() {
-        return vacationService.retriveAllVacations();
+    public List<Vacation> retrieveVacations() {
+        return vacationService.retrieveAllVacations();
     }
 
     @GetMapping(path = "/vacations/{id}")
-    public Vacation retriveVacation(@PathVariable("id") Long id) {
-        return vacationService.retriveVacation(id);
+    public Vacation retrieveVacation(@PathVariable("id") Long id) {
+        return vacationService.retrieveVacation(id);
     }
 
     @PostMapping(path = "/vacations")
@@ -35,9 +35,9 @@ public class VacationResource {
         Long vacationId = vacationService.createVacation(vacation);
         URI location =
                 ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}")
-                        .buildAndExpand(vacationId)
-                        .toUri();
+                .path("/{id}")
+                .buildAndExpand(vacationId)
+                .toUri();
 
         return ResponseEntity.created(location).build();
     }
@@ -51,6 +51,6 @@ public class VacationResource {
     public ResponseEntity<Object> updateVacation(
             @RequestBody Vacation vacation, @PathVariable Long id) {
         vacationService.updateVacation(vacation, id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();  // Should we send back no content or updated response.
     }
 }
