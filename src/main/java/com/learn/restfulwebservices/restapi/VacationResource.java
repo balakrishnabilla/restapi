@@ -43,9 +43,11 @@ public class VacationResource {
     }
 
     @DeleteMapping("/vacations/{id}")
-    public void deleteVacation(@PathVariable long id) {
+    public ResponseEntity<Object>  deleteVacation(@PathVariable long id) {
         vacationService.deleteVacation(id);
+        return ResponseEntity.noContent().build();
     }
+
 
     @PutMapping("/vacations/{id}")
     public ResponseEntity<Object> updateVacation(
