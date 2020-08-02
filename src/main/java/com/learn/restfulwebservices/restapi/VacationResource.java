@@ -11,27 +11,24 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/vacations")
 public class VacationResource {
     @Autowired
     private VacationService vacationService;
 
-    @GetMapping(path = "/")
-    public String vacations() {
-        return "Welcome to ACME VacationResource portal";
-    }
-
-    @GetMapping("/vacations")
+    @GetMapping()
     public List<Vacation> retrieveVacations() {
         return vacationService.retrieveAllVacations();
     }
 
-    @GetMapping(path = "/vacations/{id}")
+    @GetMapping(path = "/{id}")
     public Vacation retrieveVacation(@PathVariable("id") Long id) {
         return vacationService.retrieveVacation(id);
     }
 
-    @PostMapping(path = "/vacations")
+    @PostMapping()
     public ResponseEntity<Object> createVacation(@RequestBody Vacation vacation) {
+
         Long vacationId = vacationService.createVacation(vacation);
         URI location =
                 ServletUriComponentsBuilder.fromCurrentRequest()
@@ -42,17 +39,18 @@ public class VacationResource {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/vacations/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object>  deleteVacation(@PathVariable long id) {
         vacationService.deleteVacation(id);
         return ResponseEntity.noContent().build();
     }
 
 
-    @PutMapping("/vacations/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> updateVacation(
             @RequestBody Vacation vacation, @PathVariable Long id) {
         vacationService.updateVacation(vacation, id);
         return ResponseEntity.noContent().build();  // Should we send back no content or updated response.
     }
+
 }

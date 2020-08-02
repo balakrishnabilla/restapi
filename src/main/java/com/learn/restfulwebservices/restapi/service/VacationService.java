@@ -1,7 +1,9 @@
 package com.learn.restfulwebservices.restapi.service;
 
+import com.learn.restfulwebservices.restapi.entity.ReviewEntity;
 import com.learn.restfulwebservices.restapi.entity.VacationEntity;
-import com.learn.restfulwebservices.restapi.exception.VacationNotFoundException;
+import com.learn.restfulwebservices.restapi.exception.ResourceNotFoundException;
+import com.learn.restfulwebservices.restapi.pojo.Review;
 import com.learn.restfulwebservices.restapi.pojo.Vacation;
 import com.learn.restfulwebservices.restapi.repository.VacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class VacationService {
 
     public Vacation retrieveVacation( Long id) {
         Optional<VacationEntity> vacationEntity = vacationRepository.findById(id);
-        if (!vacationEntity.isPresent()) throw new VacationNotFoundException("id-" + id);
+        if (!vacationEntity.isPresent()) throw new ResourceNotFoundException("id-" + id);
         return buildVacationPojo(vacationEntity.get());
     }
 
@@ -60,6 +62,17 @@ public class VacationService {
         vacation.setDestination(save.getDestination());
         vacation.setName(save.getName());
         vacation.setNoOfDays(save.getNoOfDays());
+
+        if(save.getReviewList()!= null && !save.getReviewList().isEmpty()) {
+            vacation.setReviewList(new ArrayList<>());
+            for (ReviewEntity reviewEntity : save.getReviewList()) {
+                Review review = new Review();
+                review.setReviewId(reviewEntity.getReviewId());
+                review.setComment(reviewEntity.getComment());
+                review.setRating(reviewEntity.getRating());
+                vacation.getReviewList().add(review);
+            }
+        }
         return vacation;
     }
 
@@ -69,6 +82,15 @@ public class VacationService {
         vacationEntity.setDestination(vacation.getDestination());
         vacationEntity.setName(vacation.getName());
         vacationEntity.setNoOfDays(vacation.getNoOfDays());
+        if(vacation.getReviewList()!= null && !vacation.getReviewList().isEmpty()) {
+            vacationEntity.setReviewList(new ArrayList<>());
+            for (Review review : vacation.getReviewList()) {
+                ReviewEntity reviewEntity = new ReviewEntity();
+                reviewEntity.setComment(review.getComment());
+                reviewEntity.setRating(review.getRating());
+                vacationEntity.getReviewList().add(reviewEntity);
+            }
+        }
         return vacationEntity;
     }
 }

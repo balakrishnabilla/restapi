@@ -20,4 +20,5 @@ public class SpringConfiguration {
                 .paths(PathSelectors.any())
                 .build();
     }
+
 }

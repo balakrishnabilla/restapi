@@ -22,8 +22,7 @@ public class VacationEntity {
     private String destination;
     private int noOfDays;
 
-    @OneToMany
-    // @JoinTable(name = "review", joinColumns = @JoinColumn(name = "vacationID"), inverseJoinColumns
-    // = @JoinColumn(name = "PHONE_ID"))
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vacationID", referencedColumnName = "vacationID")
     private List<ReviewEntity> reviewList;
 }
