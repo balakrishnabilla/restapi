@@ -4,6 +4,7 @@ import com.learn.restfulwebservices.restapi.pojo.Review;
 import com.learn.restfulwebservices.restapi.pojo.Vacation;
 import com.learn.restfulwebservices.restapi.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/vacations/{vacationId}/reviews")
@@ -31,8 +33,13 @@ public class ReviewResource {
     }
 
     @GetMapping(path = "/{reviewId}")
-    public Review retrieveReview(@PathVariable ("vacationId") Long vacationId  ,@PathVariable("reviewId") Long reviewId) {
-        return reviewService.retrieveReview(vacationId,reviewId);
+    public ResponseEntity<Review> retrieveReview(@PathVariable ("vacationId") Long vacationId  ,@PathVariable("reviewId") Long reviewId) {
+         Optional<Review> optionalReview=reviewService.retrieveReview(vacationId,reviewId);
+         if(optionalReview.isPresent()){
+
+           return  ResponseEntity.status(HttpStatus.OK).body(optionalReview.get());
+         }
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping()

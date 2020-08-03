@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,53 +24,50 @@ public class ReviewService {
     @Autowired
     private VacationRepository vacationRepository;
 
-    public ResponseEntity updateReview(Review review,Long reviewID ,Long vacationID) {
+    @Transactional
+    public ResponseEntity updateReview(Review review, Long reviewID, Long vacationID) {
         Optional<VacationEntity> optionalVacationEntity = vacationRepository.findById(vacationID);
+        ReviewEntity reviewEntity = getReviewEntity(review);
         if (optionalVacationEntity.isPresent()) {
             VacationEntity vacationEntity = optionalVacationEntity.get();
-            Optional<ReviewEntity> optionalReviewEntity = vacationEntity.getReviewList().stream().filter(reviewEntity -> reviewID.equals(reviewEntity.getReviewId())).findFirst();
-            if (optionalReviewEntity.isPresent()) {
-                ReviewEntity reviewEntity = optionalReviewEntity.get();
-                reviewEntity.setRating(review.getRating());
-                reviewEntity.setComment(review.getComment());
-                reviewRepository.save(getReviewEntity(review));
-                return ResponseEntity.noContent().build();
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-
+            reviewEntity.setVacationEntity(vacationEntity);
+            reviewRepository.save(reviewEntity);
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+
     }
+
+
 
     public void deleteReview(long id) {
         reviewRepository.deleteById(id);
     }
 
+    @Transactional
     public Long createReview(Long vacationID, Review review) {
+
+        ReviewEntity reviewEntity = getReviewEntity(review);
 
         Optional<VacationEntity> optionalVacationEntity = vacationRepository.findById(vacationID);
         if (optionalVacationEntity.isPresent()) {
             VacationEntity vacationEntity = optionalVacationEntity.get();
-            vacationEntity.getReviewList().add(getReviewEntity(review));
-            vacationRepository.save(vacationEntity);
-
+            reviewEntity.setVacationEntity(vacationEntity);
+            reviewRepository.save(reviewEntity);
         }
         return null;
 
     }
 
-    public Review retrieveReview(Long vacationID, final Long reviewID) {
-        Optional<VacationEntity> optionalVacationEntity = vacationRepository.findById(vacationID);
-        if (optionalVacationEntity.isPresent()) {
-            VacationEntity vacationEntity = optionalVacationEntity.get();
-            Optional<ReviewEntity> optionalReviewEntity = vacationEntity.getReviewList().stream().filter(reviewEntity -> reviewID.equals(reviewEntity.getReviewId())).findFirst();
-            if (optionalReviewEntity.isPresent()) {
-                return buildReviewPojo(optionalReviewEntity.get());
-            }
+    public Optional<Review> retrieveReview(Long vacationID, final Long reviewID) {
 
+        Optional<ReviewEntity> optionalReviewEntity = reviewRepository.findById(reviewID);
+        if (optionalReviewEntity.isPresent()) {
+            return Optional.of(buildReviewPojo(optionalReviewEntity.get()));
         }
-        return null;
+        return Optional.empty();
+
     }
 
     public List<Review> retrieveAllReviews(Long vacationID) {
