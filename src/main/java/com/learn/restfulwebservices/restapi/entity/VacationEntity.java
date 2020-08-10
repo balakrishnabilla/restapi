@@ -5,24 +5,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "vacation")
+@Table(name = "VACATION")
 public class VacationEntity {
     @Id
-    @Column(name = "vacationID")
+    @Column(name = "VACATION_ID")
     @GeneratedValue()
     private Long id;
 
     private String name;
     private String destination;
+    @Column(name = "NO_OF_DAYS")
     private int noOfDays;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vacationID", referencedColumnName = "vacationID")
-    private List<ReviewEntity> reviewList;
+    @OneToMany(mappedBy = "vacationEntity")
+    private List<ReviewEntity> reviewList = new ArrayList<>();
 }

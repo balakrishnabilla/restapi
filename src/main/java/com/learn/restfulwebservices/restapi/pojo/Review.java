@@ -11,5 +11,5 @@ public class Review {
     private Long reviewId;
     private String rating;
     private String comment;
-
+    private Long vacationId;
 }

@@ -4,26 +4,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "review")
+@Table(name = "REVIEW")
 public class ReviewEntity {
     @Id
     @GeneratedValue
+    @Column(name = "REVIEW_ID")
     private Long reviewId;
     private String rating;
     private String comment;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vacationID", referencedColumnName = "vacationID")
+    @ManyToOne
+    @JoinColumn(name="VACATION_ID")
     private VacationEntity vacationEntity;
 }

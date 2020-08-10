@@ -87,7 +87,9 @@ public class ReviewService {
         ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setReviewId(review.getReviewId());
         reviewEntity.setComment(review.getComment());
-        review.setRating(review.getRating());
+        //reviewEntity.setVacationEntity(review.getVacation());
+
+        reviewEntity.setRating(review.getRating());
         return reviewEntity;
     }
 
@@ -98,7 +100,7 @@ public class ReviewService {
         review.setRating(reviewEntity.getRating());
         review.setComment(reviewEntity.getComment());
         review.setReviewId(reviewEntity.getReviewId());
-
+        review.setVacationId(reviewEntity.getVacationEntity().getId());
         return review;
     }
 }
