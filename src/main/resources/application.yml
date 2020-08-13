@@ -4,17 +4,10 @@ server:
 
 spring:
   application:
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            clientId: 9ae72ae47d871960b1e6
-            clientSecret: 880a3832aa9ccb23dab278420054420506ce3600
-      jpa:
-        hibernate:
-          ddl-auto=update: true
-
-        properties:
-          hibernate:
-            format_sql: true
+    name: acme
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
