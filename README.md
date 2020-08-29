@@ -1,4 +1,4 @@
-# Rest Applicaiton
+# Journey from Rest to Microservice
 
 ### Develop ACME Vacation Restful API Applications
    - All CRUD Operations of Vacations GET,POST,PUT,DELETE
@@ -18,7 +18,6 @@
    - Add Eureka naming server
    - Register Vacation and Booking services as Eureka clients using Feign
    - Load Balancing using Ribbon
-
 
 ### Access Application
 ```
