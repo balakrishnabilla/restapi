@@ -1,4 +1,4 @@
-package com.learn.restfulwebservices.restapi;
+package com.learn.restfulwebservices.restapi.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

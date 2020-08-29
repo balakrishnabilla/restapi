@@ -1,4 +1,4 @@
-package com.learn.restfulwebservices.restapi;
+package com.learn.restfulwebservices.restapi.controller;
 
 import com.learn.restfulwebservices.restapi.pojo.Review;
 import com.learn.restfulwebservices.restapi.pojo.Vacation;

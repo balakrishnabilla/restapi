@@ -1,4 +1,4 @@
-package com.learn.restfulwebservices.restapi;
+package com.learn.restfulwebservices.restapi.configuration;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

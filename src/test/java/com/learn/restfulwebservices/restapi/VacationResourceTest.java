@@ -1,6 +1,7 @@
 package com.learn.restfulwebservices.restapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learn.restfulwebservices.restapi.controller.VacationResource;
 import com.learn.restfulwebservices.restapi.pojo.Vacation;
 import com.learn.restfulwebservices.restapi.service.VacationService;
 import org.hamcrest.MatcherAssert;

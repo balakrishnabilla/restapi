@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: acme
+    name: acme-vacation-service
   jpa:
     hibernate:
       ddl-auto: update

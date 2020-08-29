@@ -1,4 +1,4 @@
-package com.learn.restfulwebservices.restapi;
+package com.learn.restfulwebservices.restapi.controller;
 
 import com.learn.restfulwebservices.restapi.pojo.VacationBookingReq;
 import com.learn.restfulwebservices.restapi.service.VacationBookingService;
@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/vacation/{vacationID}/book")
+@RequestMapping(path = "/vacations/{vacationID}/book")
 public class BookingController {
     @Autowired
    private VacationBookingService vacationBookingService;
 
 
-    @PostMapping
+    @PostMapping("/rest")
     public ResponseEntity bookVacation(@PathVariable("vacationID") Long vacationID, @RequestBody VacationBookingReq  vacationBookingReq){
-        return  vacationBookingService.book(vacationID,vacationBookingReq);
+        return  vacationBookingService.bookRestTemplate(vacationID,vacationBookingReq);
+    }
+
+    @PostMapping
+    public ResponseEntity bookFeignVacation(@PathVariable("vacationID") Long vacationID, @RequestBody VacationBookingReq  vacationBookingReq){
+        return  vacationBookingService.bookFeign(vacationID,vacationBookingReq);
     }
 }
