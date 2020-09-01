@@ -18,7 +18,11 @@
    - Add Eureka naming server
    - Register Vacation and Booking services as Eureka clients using Feign
    - Load Balancing using Ribbon
-
+### Distributed Tracing
+   - zipkin installation
+   - AMAQ Protocol- Kafka/Rabbit MQ/Active MQ installation
+   - zipkin web interface (UI)
+   - Enable dependency
 ### Access Application
 ```
 Useful urls for reference
