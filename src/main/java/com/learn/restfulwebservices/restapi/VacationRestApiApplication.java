@@ -10,9 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableHystrix
 @EnableDiscoveryClient
-
 public class VacationRestApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(VacationRestApiApplication.class, args);
     }

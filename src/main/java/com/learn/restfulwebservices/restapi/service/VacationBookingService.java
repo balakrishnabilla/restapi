@@ -36,7 +36,7 @@ public class VacationBookingService {
     @HystrixCommand(fallbackMethod = "fallbackBook")
     public ResponseEntity bookFeign(long vacationID, VacationBookingReq vacationBookingReq) {
         HotelBookingRequest hotelBookingRequest = getBookingRequest();
-       // try {
+        try {
             ResponseEntity response = proxy.bookHotel(hotelBookingRequest);
             if (response.getStatusCode() == HttpStatus.CREATED || response.getStatusCode() == HttpStatus.OK) {
                 return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -44,9 +44,9 @@ public class VacationBookingService {
                 return ResponseEntity.ok(" fail to book");
             }
 
-       /* } catch (Exception  e){
+        } catch (Exception  e){
             return ResponseEntity.ok(" fail to book" +e.getMessage());
-        }*/
+        }
     }
 
     public ResponseEntity fallbackBook(long vacationID, VacationBookingReq vacationBookingReq) {

@@ -1,7 +1,10 @@
 debug: true
 server:
   port: 8080
-
+  ribbon:
+    eureka:
+      enabled: true
+    ServerListRefreshInterval: 1000
 spring:
   application:
     name: acme-vacation-service
@@ -15,5 +18,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+    healthcheck:
+      enabled: true
   instance:
     preferIpAddress: true
