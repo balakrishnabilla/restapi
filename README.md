@@ -28,6 +28,7 @@ Useful urls for reference
 - ACME Booking feign - http://localhost:8080/vacations/1/book
 - Booking service    - http://localhost:8091/hoteldata
 - ACME Booking rest  - http://localhost:8080/vacations/1/book/rest
+- ACME Vacation Review- http://localhost:8080/vacations/1/reviews
 - Swagger API DOCS   - http://localhost:8080/swagger-ui.html
 - H2 console         - http://localhost:8080/h2-console
 
