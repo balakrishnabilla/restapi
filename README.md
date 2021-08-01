@@ -36,3 +36,9 @@ Useful urls for reference
 - Swagger API DOCS   - http://localhost:8080/swagger-ui.html
 - H2 console         - http://localhost:8080/h2-console
 
+```
+References
+```
+https://developer.spotify.com/documentation/general/guides/authorization-guide/
+https://docs.github.com/en/rest
+
