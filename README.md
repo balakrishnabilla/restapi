@@ -39,6 +39,6 @@ Useful urls for reference
 ```
 References
 ```
-https://developer.spotify.com/documentation/general/guides/authorization-guide/
-https://docs.github.com/en/rest
+- https://developer.spotify.com/documentation/general/guides/authorization-guide/
+- https://docs.github.com/en/rest
 
